@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.reyvery.ecommerce.model.DetalleOrden;
 import com.reyvery.ecommerce.model.Orden;
 import com.reyvery.ecommerce.model.Producto;
+import com.reyvery.ecommerce.model.Usuario;
+import com.reyvery.ecommerce.service.IUsuarioService;
 import com.reyvery.ecommerce.service.ProductoService;
 
 @Controller
@@ -28,6 +30,9 @@ public class HomeController {
 
 	@Autowired
 	private ProductoService productoService;
+	@Autowired
+	private IUsuarioService usuarioService;
+	
 	// almacena el detalle de la orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 	// datos de orden
@@ -118,9 +123,11 @@ public class HomeController {
 		return "usuario/carrito";
 	}
 	@GetMapping("/order")
-	public String order() {
-		
-
+	public String order(Model model) {
+		 Usuario usuario = usuarioService.findById(1).get();
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
 		return "usuario/resumenorden";
 	}
 }
