@@ -6,3 +6,17 @@
 body {
   padding-top: 56px;
 }
+
+/* Cambiar el color del scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Ancho del scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d7d7a8;; /* Color del thumb (barra deslizante) */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Color del track (fondo del scrollbar) */
+}
+
