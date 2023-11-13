@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.reyvery.ecommerce.service.IUsuarioService;
 import com.reyvery.ecommerce.service.ProductoService;
 import com.reyvery.ecommerce.model.Producto;
 
@@ -23,6 +24,9 @@ public class AdministradorController {
 	@Autowired
 	private ProductoService productoService;
 	
+	@Autowired
+	private IUsuarioService usuarioService;
+	
 	@GetMapping("")
 	public String home(Model model) {
 		
@@ -30,5 +34,11 @@ public class AdministradorController {
 		model.addAttribute("productos", productos);
 		
 		return "administrador/home";
+	}
+	@GetMapping("/usuarios")
+	public String usuarios(Model model) {
+		model.addAttribute("usuarios", usuarioService.findAll());
+		
+		return "administrador/usuarios";
 	}
 }
