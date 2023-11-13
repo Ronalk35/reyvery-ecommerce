@@ -53,6 +53,43 @@
   </div>
   
   
+  
+  <!-- Navigation User -->
+  <div th:fragment="header-user">
+	  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" style="background-color: #3b7714 !important;">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}">Reyvery Market</a>
+
+      <form class="form-inline my-2 my-lg-0" method="post"
+      th:action="@{/busqueda}">
+      <input class="form-control mr-sm-2" type="search"
+      placeholder="Buscar" aria-label="Search" name="nombre"
+      autocomplete="off">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> USER </a>
+							
+							<div class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" th:href="@{/getCart}">Carrito</a> 
+							</div></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  
+  
 
    
     <!-- Footer -->
