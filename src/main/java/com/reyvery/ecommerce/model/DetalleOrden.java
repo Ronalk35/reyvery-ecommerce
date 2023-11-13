@@ -21,7 +21,7 @@ public class DetalleOrden {
 	private double total;
 	
 	
-	@OneToOne
+	@ManyToOne
 	private Orden orden;
 	
 	
