@@ -3,6 +3,8 @@ package com.reyvery.ecommerce.controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.reyvery.ecommerce.model.Producto;
 import com.reyvery.ecommerce.model.Usuario;
+import com.reyvery.ecommerce.service.IUsuarioService;
 import com.reyvery.ecommerce.service.ProductoService;
 import com.reyvery.ecommerce.service.UploadFileService;
+import com.reyvery.ecommerce.service.UsuarioServiceImpl;
 
 @Controller
 @RequestMapping("/productos")
@@ -33,6 +37,9 @@ public class ProductoController {
 	@Autowired
 	private ProductoService productoService;
 	
+	@Autowired
+	private IUsuarioService usuarioService;
+	
 	@GetMapping("")
 	public String show(Model model) {
 		model.addAttribute("productos", productoService.findAll());
@@ -46,9 +53,12 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/save")
-	public String save(Producto producto, @RequestParam("img") MultipartFile file) throws IOException {
+	public String save(Producto producto, @RequestParam("img") MultipartFile file, HttpSession session) throws IOException {
 		LOGGER.info("Este es el objeto producto {}", producto);
-		Usuario u = new Usuario(1, "", "", "", "", "", "","");
+		
+		
+		
+		Usuario u = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
 		producto.setUsuario(u);
 		
 		// cargar imagen
