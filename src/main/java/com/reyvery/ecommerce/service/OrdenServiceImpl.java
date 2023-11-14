@@ -1,8 +1,10 @@
 package com.reyvery.ecommerce.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,38 +32,34 @@ public class OrdenServiceImpl implements IOrdenService {
 	}
 
 	public String generarNumeroOrden() {
-		int numero=0;
-		String numeroConcatenado="";
+	    int numero = 0;
+	    String numeroConcatenado = "";
 
-		List<Orden> ordenes = findAll();
+	    List<Orden> ordenes = findAll();
 
-		List<Integer> numeros= new ArrayList<Integer>();
-		
-		ordenes.stream().forEach(o -> {
-		    String numeroString = o.getNumero();
-		    if (!numeroString.equals("numeroConcatenado")) {
-		        numeros.add(Integer.parseInt(numeroString));
-		    }
-		});
+	    List<Integer> numeros = new ArrayList<>();
 
+	    if (!ordenes.isEmpty()) {
+	        numeros = ordenes.stream()
+	            .map(o -> Integer.parseInt(o.getNumero()))
+	            .collect(Collectors.toList());
 
-		if (ordenes.isEmpty()) {
-			numero=1;
-		} else {
-			numero = numeros.stream().max(Integer::compare).orElse(0) + 1;
+	        numero = Collections.max(numeros) + 1;
+	    } else {
+	        numero = 1;
+	    }
 
-			numero++;
-		}
-		if (numero<10) {
-			numeroConcatenado= "000000000"+String.valueOf(numero);
-		} else if (numero < 100) {
-			numeroConcatenado = "00000000"+String.valueOf(numero);
-		} else if (numero < 1000) {
-			numeroConcatenado = "0000000"+String.valueOf(numero);
-		} else if (numero < 10000) {
-			numeroConcatenado = "000000"+String.valueOf(numero);
-		}
-		return numeroConcatenado;
+	    if (numero < 10) {
+	        numeroConcatenado = "000000000" + String.valueOf(numero);
+	    } else if (numero < 100) {
+	        numeroConcatenado = "00000000" + String.valueOf(numero);
+	    } else if (numero < 1000) {
+	        numeroConcatenado = "0000000" + String.valueOf(numero);
+	    } else if (numero < 10000) {
+	        numeroConcatenado = "000000" + String.valueOf(numero);
+	    }
+
+	    return numeroConcatenado;
 	}
 
 	@Override
