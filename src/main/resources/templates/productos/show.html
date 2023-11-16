@@ -41,7 +41,18 @@
   </ol>
 
   <a class="btn btn-primary" th:href="@{/productos/create}" > Crear Producto</a>
-  <h2>Productos</h2>
+  <!-- Reporte -->
+  <a class="btn btn-success" th:href="@{/productos/exportarPDF}" > Exportar a PDF</a>
+  <!-- Reporte Excel -->
+  <a class="btn btn-success" th:href="@{/productos/exportarExcel}" style="background-color: #3b7714; color: white;">Exportar a Excel</a>
+  <!-- Inicio -->
+  <a class="btn btn-warning" th:href="@{/administrador}" > Volver a Inicio</a>
+
+  <br>
+  <br>
+  
+  <h2>Productos de Reyvery Market:</h2>
+  
   <table class="table">
     <thead>
       <tr>

@@ -1,8 +1,13 @@
 package com.reyvery.ecommerce.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.*;
@@ -16,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lowagie.text.DocumentException;
 import com.reyvery.ecommerce.model.Producto;
 import com.reyvery.ecommerce.model.Usuario;
+import com.reyvery.ecommerce.reportes.ProductoExporterExcel;
+import com.reyvery.ecommerce.reportes.ProductoExporterPDF;
 import com.reyvery.ecommerce.service.IUsuarioService;
 import com.reyvery.ecommerce.service.ProductoService;
 import com.reyvery.ecommerce.service.UploadFileService;
@@ -122,6 +130,42 @@ public class ProductoController {
 		
 		productoService.delete(id);
 		return "redirect:/productos";
+	}
+	
+	
+	
+	@GetMapping("/exportarPDF")
+	public void exportarListadoDeProductos(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaActual = dateFormater.format(new Date());
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Productos_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Producto> producto = productoService.findAll();
+		ProductoExporterPDF exporter = new ProductoExporterPDF(producto);
+		exporter.exportar(response);
+		
+	}
+	
+	@GetMapping("/exportarExcel")
+	public void exportarListadoDeProductosExcel(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/octet-stream");
+		
+		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaActual = dateFormater.format(new Date());
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Productos_" + fechaActual + ".xlsx";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Producto> producto = productoService.findAll();
+		ProductoExporterExcel exporter = new ProductoExporterExcel(producto);
+		exporter.exportar(response);
+		
 	}
 	
 }
