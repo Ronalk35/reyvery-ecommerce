@@ -6,19 +6,19 @@
 
 ## Screenshots
 
-![App Screenshot](reyvery-ecommerce/images/captura/Panel_Adm.png)
+![Panel Admin](images/captura/Panel_Adm.png)
 
-![App Screenshot](reyvery-ecommerce/images/captura/Crear_Prod.png)
+![Crear Producto](images/captura/Crear_Prod.png)
 
-![App Screenshot](reyvery-ecommerce/images/captura/Reporte.png)
+![Reporte](images/captura/Reporte.png)
 
-![App Screenshot](reyvery-ecommerce/images/captura/Uuario_principals.png))
+![Usuario Principal](images/captura/Usuario_principal.png))
 
-![App Screenshot](reyvery-ecommerce/images/captura/Seleccion_prod.png))
+![Selección Producto](images/captura/Seleccion_prod.png))
 
-![App Screenshot](reyvery-ecommerce/images/captura/Ver_Usuario_admin.png))
+![Ver Usuario Admin](images/captura/Ver_Usuario_admin.png))
 
-![App Screenshot](reyvery-ecommerce/images/captura/Ver_orden.png))
+![Ver Orden](images/captura/Ver_orden.png))
 
 
 
