@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Inspeccionar Producto</title>
+
+
+   <!-- Bootstrap core CSS -->
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <div th:include="usuario/template_usuario.html::header">
+	  
+  </div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">
+        Reyvery Market - <small>Mostrar Producto</small>
+      </h1>
+
+      <ol class="breadcrumb" style="background-color: #d7d7a8;">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item active">Producto</li>
+      </ol>
+
+      <!-- Blog Post -->
+      <div class="card mb-4">
+        <div class="card-body" style="border: 2px solid #3b7714;">
+          <div class="row">
+            <div class="col-lg-6">
+				
+              <a href="#" class="image-zoom"> <img class="img-fluid rounded"
+                th:src="@{/images/{img} (img=${producto.imagen})}"  alt="">
+              </a>
+            </div>
+            <div class="col-lg-6">
+              <form th:action="@{/cart}" method="POST">
+				  <input type="hidden" th:value="${producto.id}" name="id">
+                <h2 class="card-title" th:text="${producto.nombre}"></h2>
+
+                <ul class="list-group" style="border: 2px solid #3b7714;">
+                  <li class="list-group-item"><h5 th:text=" 'Precio: S/.'+ ${producto.precio}"></h5></li>
+                  <li class="list-group-item">
+                    <p th:text=" 'Descripción: ' + ${producto.descripcion}"></p>
+                  </li>
+                  <li class="list-group-item"><h6>
+                    Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
+                    min="1" max="9" value="1">
+                  </h6></li>
+                </ul>
+                <br>
+
+
+                <button type="submit"  class="btn btn-success">Añadir al carrito </button>
+                <a th:href="@{/}" class="btn btn-danger text-white">Regresar</a>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    
+    <style>
+    .image-zoom:hover img {
+        transform: scale(1.05); /* Puedes ajustar el factor de escala según tus preferencias */
+        transition: transform 0.3s ease; /* Añade una transición suave para un efecto más agradable */
+    }
+</style>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div th:include="usuario/template_usuario.html::footer">
+	  
+  </div>
+
+     <!-- Bootstrap core JavaScript -->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+  </body>
+
+  </html>

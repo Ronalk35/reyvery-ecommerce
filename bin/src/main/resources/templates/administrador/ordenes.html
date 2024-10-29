@@ -32,13 +32,12 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">
-        Spring eCommerce <small>Detalles</small>
+        Reyvery Market <small>Ordenes</small>
       </h1>
 
       <ol class="breadcrumb" style="background-color: #d7d7a8;">
         <li class="breadcrumb-item"><a th:href="@{/administrador}">Home</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/administrador/ordenes}">Compras</a></li>
-        <li class="breadcrumb-item active">Detalle de la Compra</li>
+        <li class="breadcrumb-item active">Ordenes</li>
       </ol>
 
       <!-- Blog Post -->
@@ -49,18 +48,18 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Producto</th>                  
-                  <th scope="col">Precio</th>
-                  <th scope="col">Total</th>                  
+                  <th scope="col">No. de Orden</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="detalle:${detalles}">
-                  <td th:text="${detalle.cantidad}"></td>
-                  <td th:text="${detalle.nombre}"></td>
-                  <td th:text="${detalle.precio}"></td>
-                  <td th:text="${detalle.total}"></td>
+                <tr th:each="orden:${ordenes}">
+                  <td th:text="${orden.numero}"></td>
+                  <td th:text="${orden.fechaCreacion}"></td>
+                  <td th:text="${orden.total}"></td>
+                  <td><a th:href="@{/administrador/detalle/{id} (id=${orden.id})}" class="btn btn-success">Ver Detalle</a></td>
                 </tr>
               </tbody>
             </table>
@@ -72,7 +71,7 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <div th:include="administrador/template_admin.html::footer">
+<div th:include="administrador/template_admin.html::footer">
 	  
   </div>
 
@@ -83,4 +82,3 @@
 </body>
 
 </html>
-
